@@ -13,6 +13,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.generator.EventType;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
@@ -26,6 +27,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Item {
@@ -84,7 +86,8 @@ public class Item {
 	 @Column(insertable = false)
 	 @ColumnDefault("1.00")
 	 @Generated(
-	         org.hibernate.annotations.GenerationTime.INSERT
+	         //org.hibernate.annotations.GenerationTime.INSERT   // deprecated
+			 event = EventType.INSERT
 	 )
 	 private BigDecimal initialPrice;
 	
