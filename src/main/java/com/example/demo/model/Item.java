@@ -51,9 +51,9 @@ public class Item {
 	 private String name;
 	 
 	 @NotNull
-	    @Convert(converter = MonetaryAmountConverter.class)
-	    @Column(name = "PRICE", length = 63)
-	    private MonetaryAmount buyNowPrice;
+     @Convert(converter = MonetaryAmountConverter.class)
+     @Column(name = "PRICE", length = 63)
+     private MonetaryAmount buyNowPrice;
 	
 	 @OneToMany(mappedBy = "item",
 	         cascade = CascadeType.PERSIST,
