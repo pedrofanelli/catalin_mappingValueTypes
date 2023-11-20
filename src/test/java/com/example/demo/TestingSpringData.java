@@ -57,7 +57,7 @@ public class TestingSpringData {
         user.setUsername("username");
         user.setHomeAddress(new Address("Flowers Street", city));
         user.setBillingAddress(new Address("12 de Octubre 265", city2)); //nuestro, testeando otro address
-        System.out.println("llegamos!!!");
+
         userRepository.save(user);
 
         Item item = new Item();
