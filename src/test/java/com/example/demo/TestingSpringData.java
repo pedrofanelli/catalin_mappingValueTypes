@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -15,12 +19,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.example.demo.configuration.SpringDataConfiguration;
 import com.example.demo.model.Address;
 import com.example.demo.model.AuctionType;
+import com.example.demo.model.City;
 import com.example.demo.model.Item;
 import com.example.demo.model.User;
 import com.example.demo.repositories.ItemRepository;
 import com.example.demo.repositories.UserRepository;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(SpringExtension.class)
@@ -36,10 +39,20 @@ public class TestingSpringData {
     @Test
     void storeLoadEntities() {
 
+    	City city = new City();
+        city.setName("Boston");
+        city.setZipcode("12345");
+        city.setCountry("USA");
+        
+        City city2 = new City();
+        city2.setName("Bahía Blanca");
+        city2.setZipcode("8000");
+        city2.setCountry("Argentina");
+    	
         User user = new User();
         user.setUsername("username");
-        user.setHomeAddress(new Address("Flowers Street", "12345", "Boston"));
-        user.setBillingAddress(new Address("12 de Octubre 265", "8000", "Bahía Blanca")); //nuestro, testeando otro address
+        user.setHomeAddress(new Address("Flowers Street", city));
+        user.setBillingAddress(new Address("12 de Octubre 265", city2)); //nuestro, testeando otro address
         userRepository.save(user);
 
         Item item = new Item();
@@ -55,8 +68,8 @@ public class TestingSpringData {
                 () -> assertEquals(1, users.size()),
                 () -> assertEquals("username", users.get(0).getUsername()),
                 () -> assertEquals("Flowers Street", users.get(0).getHomeAddress().getStreet()),
-                () -> assertEquals("12345", users.get(0).getHomeAddress().getZipcode()),
-                () -> assertEquals("Boston", users.get(0).getHomeAddress().getCity()),
+                () -> assertEquals("12345", users.get(0).getHomeAddress().getCity().getZipcode()),
+                () -> assertEquals("Boston", users.get(0).getHomeAddress().getCity().getName()),
                 () -> assertEquals(1, items.size()),
                 () -> assertEquals("AUCTION: Some Item", items.get(0).getName()),
                 () -> assertEquals("description of the item", items.get(0).getDescription()),

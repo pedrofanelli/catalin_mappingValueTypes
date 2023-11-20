@@ -19,10 +19,12 @@ public class User {
     @Embedded // Not necessary...
     @AttributeOverride(name = "street",  // nombre de la pripiedad real lo cambiamos, sino se repite con homeAddress
             column = @Column(name = "BILLING_STREET")) // NULLable!
-    @AttributeOverride(name = "zipcode",
+    @AttributeOverride(name = "city.zipcode", // son clases nesteadas!
             column = @Column(name = "BILLING_ZIPCODE", length = 5))
-    @AttributeOverride(name = "city",
+    @AttributeOverride(name = "city.name",
             column = @Column(name = "BILLING_CITY"))
+    @AttributeOverride(name = "city.country",
+    		column = @Column(name = "BILLING_COUNTRY"))
     private Address billingAddress;
 
     public Long getId() {
