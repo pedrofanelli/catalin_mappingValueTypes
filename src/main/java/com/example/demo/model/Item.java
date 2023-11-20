@@ -15,11 +15,14 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.generator.EventType;
 
+import com.example.demo.converter.MonetaryAmountConverter;
+
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.Basic;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -46,6 +49,11 @@ public class Item {
 	 @Access(AccessType.PROPERTY)
 	 @Column(name = "ITEM_NAME") // Mappings are still expected here!
 	 private String name;
+	 
+	 @NotNull
+	    @Convert(converter = MonetaryAmountConverter.class)
+	    @Column(name = "PRICE", length = 63)
+	    private MonetaryAmount buyNowPrice;
 	
 	 @OneToMany(mappedBy = "item",
 	         cascade = CascadeType.PERSIST,
@@ -103,6 +111,14 @@ public class Item {
 	             !name.startsWith("AUCTION: ") ? "AUCTION: " + name : name;
 	 }
 	
+	 public MonetaryAmount getBuyNowPrice() {
+         return buyNowPrice;
+     }
+
+     public void setBuyNowPrice(MonetaryAmount buyNowPrice) {
+         this.buyNowPrice = buyNowPrice;
+     }
+	 
 	 public Set<Bid> getBids() {
 	     return Collections.unmodifiableSet(bids);
 	 }
