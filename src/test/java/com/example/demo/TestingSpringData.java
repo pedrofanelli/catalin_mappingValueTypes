@@ -39,12 +39,13 @@ public class TestingSpringData {
         User user = new User();
         user.setUsername("username");
         user.setHomeAddress(new Address("Flowers Street", "12345", "Boston"));
+        user.setBillingAddress(new Address("12 de Octubre 265", "8000", "Bahía Blanca")); //nuestro, testeando otro address
         userRepository.save(user);
 
         Item item = new Item();
         item.setName("Some Item");
         item.setMetricWeight(2);
-        item.setDescription("descriptiondescription");
+        item.setDescription("description of the item");
         itemRepository.save(item);
 
         List<User> users = (List<User>) userRepository.findAll();
@@ -58,7 +59,7 @@ public class TestingSpringData {
                 () -> assertEquals("Boston", users.get(0).getHomeAddress().getCity()),
                 () -> assertEquals(1, items.size()),
                 () -> assertEquals("AUCTION: Some Item", items.get(0).getName()),
-                () -> assertEquals("descriptiondescription", items.get(0).getDescription()),
+                () -> assertEquals("description of the item", items.get(0).getDescription()),
                 () -> assertEquals(AuctionType.HIGHEST_BID, items.get(0).getAuctionType()),
                 () -> assertEquals("descriptiond...", items.get(0).getShortDescription()),
                 () -> assertEquals(2.0, items.get(0).getMetricWeight()),
