@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Currency;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ import com.example.demo.model.Address;
 import com.example.demo.model.AuctionType;
 import com.example.demo.model.City;
 import com.example.demo.model.Item;
+import com.example.demo.model.MonetaryAmount;
 import com.example.demo.model.User;
 import com.example.demo.repositories.ItemRepository;
 import com.example.demo.repositories.UserRepository;
@@ -59,6 +61,7 @@ public class TestingSpringData {
         item.setName("Some Item");
         item.setMetricWeight(2);
         item.setDescription("descriptiondescription");
+        item.setBuyNowPrice(new MonetaryAmount(BigDecimal.valueOf(1.1), Currency.getInstance("USD")));
         itemRepository.save(item);
 
         List<User> users = (List<User>) userRepository.findAll();
@@ -72,6 +75,7 @@ public class TestingSpringData {
                 () -> assertEquals("Boston", users.get(0).getHomeAddress().getCity().getName()),
                 () -> assertEquals(1, items.size()),
                 () -> assertEquals("AUCTION: Some Item", items.get(0).getName()),
+                () -> assertEquals("1.1 USD", items.get(0).getBuyNowPrice().toString()),
                 () -> assertEquals("descriptiondescription", items.get(0).getDescription()),
                 () -> assertEquals(AuctionType.HIGHEST_BID, items.get(0).getAuctionType()),
                 () -> assertEquals("descriptiond...", items.get(0).getShortDescription()),
