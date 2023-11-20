@@ -60,8 +60,8 @@ public class TestingSpringData {
         Item item = new Item();
         item.setName("Some Item");
         item.setMetricWeight(2);
-        item.setDescription("descriptiondescription");
-        item.setBuyNowPrice(new MonetaryAmount(BigDecimal.valueOf(1.1), Currency.getInstance("USD")));
+        item.setDescription("descriptiondescription"); // se guarda como string pero usamos como clase compleja MonetaryAmount
+        item.setBuyNowPrice(new MonetaryAmount(BigDecimal.valueOf(1.1), Currency.getInstance("USD"))); //seteando precio usando converter
         itemRepository.save(item);
 
         List<User> users = (List<User>) userRepository.findAll();
