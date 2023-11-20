@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
@@ -19,8 +20,11 @@ public class Address {
     private String street;
 
     @NotNull
-    @Column(nullable = false)
-    private String city;
+    @AttributeOverride(
+            name = "name",  //nombre de la propiedad de la clase City, la cambiamos a CITY
+            column = @Column(name = "CITY", nullable = false)
+    )
+    private City city;
 
     /**
      * Hibernate will call this no-argument constructor to create an instance, and then
@@ -32,9 +36,8 @@ public class Address {
     /**
      * You can have additional (public) constructors for convenience.
      */
-    public Address(String street, String zipcode, String city) {
+    public Address(String street, City city) {
         this.street = street;
-        this.zipcode = zipcode;
         this.city = city;
     }
 
@@ -46,19 +49,11 @@ public class Address {
         this.street = street;
     }
 
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 }
