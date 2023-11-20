@@ -19,10 +19,6 @@ public class Address {
     private String street;
 
     @NotNull
-    @Column(nullable = false, length = 5) // Override VARCHAR(255)
-    private String zipcode;
-
-    @NotNull
     @Column(nullable = false)
     private String city;
 
