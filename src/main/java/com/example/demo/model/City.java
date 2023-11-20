@@ -9,7 +9,7 @@ public class City {
 
 	@NotNull
     @Column(nullable = false, length = 5) // Override VARCHAR(255)
-    private String zipcode;
+    private Zipcode zipcode;
 
     @NotNull
     @Column(nullable = false)
@@ -19,11 +19,11 @@ public class City {
     @Column(nullable = false)
     private String country;
 
-    public String getZipcode() {
+    public Zipcode getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(String zipcode) {
+    public void setZipcode(Zipcode zipcode) {
         this.zipcode = zipcode;
     }
 
