@@ -21,8 +21,10 @@ import com.example.demo.configuration.SpringDataConfiguration;
 import com.example.demo.model.Address;
 import com.example.demo.model.AuctionType;
 import com.example.demo.model.City;
+import com.example.demo.model.GermanZipcode;
 import com.example.demo.model.Item;
 import com.example.demo.model.MonetaryAmount;
+import com.example.demo.model.SwissZipcode;
 import com.example.demo.model.User;
 import com.example.demo.repositories.ItemRepository;
 import com.example.demo.repositories.UserRepository;
@@ -43,18 +45,19 @@ public class TestingSpringData {
 
     	City city = new City();
         city.setName("Boston");
-        city.setZipcode("12345");
+        city.setZipcode(new GermanZipcode("GE345"));
         city.setCountry("USA");
         
         City city2 = new City();
         city2.setName("Bahía Blanca");
-        city2.setZipcode("8000");
+        city2.setZipcode(new SwissZipcode("S234"));
         city2.setCountry("Argentina");
     	
         User user = new User();
         user.setUsername("username");
         user.setHomeAddress(new Address("Flowers Street", city));
         user.setBillingAddress(new Address("12 de Octubre 265", city2)); //nuestro, testeando otro address
+        System.out.println("llegamos!!!");
         userRepository.save(user);
 
         Item item = new Item();
@@ -71,7 +74,7 @@ public class TestingSpringData {
                 () -> assertEquals(1, users.size()),
                 () -> assertEquals("username", users.get(0).getUsername()),
                 () -> assertEquals("Flowers Street", users.get(0).getHomeAddress().getStreet()),
-                () -> assertEquals("12345", users.get(0).getHomeAddress().getCity().getZipcode()),
+                () -> assertEquals("GE345", users.get(0).getHomeAddress().getCity().getZipcode().getValue()),
                 () -> assertEquals("Boston", users.get(0).getHomeAddress().getCity().getName()),
                 () -> assertEquals(1, items.size()),
                 () -> assertEquals("AUCTION: Some Item", items.get(0).getName()),

@@ -1,6 +1,9 @@
 package com.example.demo.model;
 
+import com.example.demo.converter.ZipcodeConverter;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import jakarta.validation.constraints.NotNull;
 
@@ -8,6 +11,7 @@ import jakarta.validation.constraints.NotNull;
 public class City {
 
 	@NotNull
+	@Convert(converter = ZipcodeConverter.class)
     @Column(nullable = false, length = 5) // Override VARCHAR(255)
     private Zipcode zipcode;
 

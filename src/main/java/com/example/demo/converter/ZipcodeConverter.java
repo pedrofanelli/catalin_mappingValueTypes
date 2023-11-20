@@ -12,6 +12,7 @@ public class ZipcodeConverter implements AttributeConverter<Zipcode,String>  {
 
 	@Override
     public String convertToDatabaseColumn(Zipcode attribute) {
+		System.out.println("adentro de converter: "+attribute);
         return attribute.getValue();
     }
 
