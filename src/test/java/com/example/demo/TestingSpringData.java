@@ -45,6 +45,7 @@ public class TestingSpringData {
         city.setName("Boston");
         city.setZipcode("12345");
         city.setCountry("USA");
+        
         City city2 = new City();
         city2.setName("Bahía Blanca");
         city2.setZipcode("8000");
