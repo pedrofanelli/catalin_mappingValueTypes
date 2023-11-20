@@ -20,6 +20,9 @@ import com.example.demo.model.User;
 import com.example.demo.repositories.ItemRepository;
 import com.example.demo.repositories.UserRepository;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {SpringDataConfiguration.class})
 public class TestingSpringData {
@@ -45,7 +48,7 @@ public class TestingSpringData {
         itemRepository.save(item);
 
         List<User> users = (List<User>) userRepository.findAll();
-        List<Item> items = (List<Item>) itemRepository.findByMetricWeight(2.0);
+        List<Item> items = (List<Item>) itemRepository.findByMetricWeight(2.0); //creada por nosotros
 
         assertAll(
                 () -> assertEquals(1, users.size()),
