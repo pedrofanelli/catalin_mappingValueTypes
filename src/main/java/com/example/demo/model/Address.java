@@ -9,7 +9,7 @@ import jakarta.validation.constraints.NotNull;
  * has no identifier property.
  * 
  * No tiene ID porque no está representado en la base de datos, son propiedades que se suman a las
- * que posea la clase a la cual este POJO se "une" o "embeba"
+ * que posea la clase a la cual este POJO se "une" o "embeba". En nuestro caso la clase User
  */
 @Embeddable
 public class Address {
